@@ -1,0 +1,132 @@
+{
+	"name": "SRC_NSEData",
+	"properties": {
+		"type": "MappingDataFlow",
+		"typeProperties": {
+			"sources": [
+				{
+					"dataset": {
+						"referenceName": "DS_NSEData",
+						"type": "DatasetReference"
+					},
+					"name": "NSEOutputStream"
+				}
+			],
+			"sinks": [
+				{
+					"dataset": {
+						"referenceName": "DS_NSEData_Output",
+						"type": "DatasetReference"
+					},
+					"name": "SNKSaveFilteredData"
+				}
+			],
+			"transformations": [
+				{
+					"name": "FLTFilterSecurities"
+				},
+				{
+					"name": "SLTRenameColumns"
+				}
+			],
+			"scriptLines": [
+				"source(output(",
+				"          TradDt as string,",
+				"          BizDt as string,",
+				"          Sgmt as string,",
+				"          Src as string,",
+				"          FinInstrmTp as string,",
+				"          FinInstrmId as string,",
+				"          ISIN as string,",
+				"          TckrSymb as string,",
+				"          SctySrs as string,",
+				"          XpryDt as string,",
+				"          FininstrmActlXpryDt as string,",
+				"          StrkPric as string,",
+				"          OptnTp as string,",
+				"          FinInstrmNm as string,",
+				"          OpnPric as string,",
+				"          HghPric as string,",
+				"          LwPric as string,",
+				"          ClsPric as string,",
+				"          LastPric as string,",
+				"          PrvsClsgPric as string,",
+				"          UndrlygPric as string,",
+				"          SttlmPric as string,",
+				"          OpnIntrst as string,",
+				"          ChngInOpnIntrst as string,",
+				"          TtlTradgVol as string,",
+				"          TtlTrfVal as string,",
+				"          TtlNbOfTxsExctd as string,",
+				"          SsnId as string,",
+				"          NewBrdLotQty as string,",
+				"          Rmks as string,",
+				"          Rsvd1 as string,",
+				"          Rsvd2 as string,",
+				"          Rsvd3 as string,",
+				"          Rsvd4 as string",
+				"     ),",
+				"     allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     ignoreNoFilesFound: false) ~> NSEOutputStream",
+				"NSEOutputStream filter(equals(SctySrs, 'EQ') && in(['BIOCON', 'CAPLIPOINT', 'CRISIL', 'DEEPAKNTR', 'EICHERMOT', 'HAPPSTMNDS', 'HEROMOTOCO', 'HINDUNILVR', 'ICICIBANK', 'IDFCFIRSTB', 'LT', 'MARUTI', 'NESTLEIND', 'PAGEIND', 'TATAPOWER', 'TCS', 'TIMKEN', 'YESBANK'], TckrSymb)) ~> FLTFilterSecurities",
+				"FLTFilterSecurities select(mapColumn(",
+				"          TradeDate = TradDt,",
+				"          ISIN,",
+				"          Symbol = TckrSymb,",
+				"          OpenPrice = OptnTp,",
+				"          Name = FinInstrmNm,",
+				"          OpenPrice = OpnPric,",
+				"          HighPrice = HghPric,",
+				"          LowPrice = LwPric,",
+				"          ClosePrice = ClsPric,",
+				"          LastPrice = LastPric,",
+				"          PreviousClosePrice = PrvsClsgPric,",
+				"          TradeVolumne = TtlTradgVol",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SLTRenameColumns",
+				"SLTRenameColumns sink(allowSchemaDrift: true,",
+				"     validateSchema: false,",
+				"     input(",
+				"          TradDt as string,",
+				"          BizDt as string,",
+				"          Sgmt as string,",
+				"          Src as string,",
+				"          FinInstrmTp as string,",
+				"          FinInstrmId as string,",
+				"          ISIN as string,",
+				"          TckrSymb as string,",
+				"          SctySrs as string,",
+				"          XpryDt as string,",
+				"          FininstrmActlXpryDt as string,",
+				"          StrkPric as string,",
+				"          OptnTp as string,",
+				"          FinInstrmNm as string,",
+				"          OpnPric as string,",
+				"          HghPric as string,",
+				"          LwPric as string,",
+				"          ClsPric as string,",
+				"          LastPric as string,",
+				"          PrvsClsgPric as string,",
+				"          UndrlygPric as string,",
+				"          SttlmPric as string,",
+				"          OpnIntrst as string,",
+				"          ChngInOpnIntrst as string,",
+				"          TtlTradgVol as string,",
+				"          TtlTrfVal as string,",
+				"          TtlNbOfTxsExctd as string,",
+				"          SsnId as string,",
+				"          NewBrdLotQty as string,",
+				"          Rmks as string,",
+				"          Rsvd1 as string,",
+				"          Rsvd2 as string,",
+				"          Rsvd3 as string,",
+				"          Rsvd4 as string",
+				"     ),",
+				"     skipDuplicateMapInputs: true,",
+				"     skipDuplicateMapOutputs: true) ~> SNKSaveFilteredData"
+			]
+		}
+	}
+}

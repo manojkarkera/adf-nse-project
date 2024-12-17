@@ -1,0 +1,160 @@
+{
+	"name": "DS_NSEData",
+	"properties": {
+		"linkedServiceName": {
+			"referenceName": "LS_BlobStorage_NSE",
+			"type": "LinkedServiceReference"
+		},
+		"annotations": [],
+		"type": "DelimitedText",
+		"typeProperties": {
+			"location": {
+				"type": "AzureBlobStorageLocation",
+				"container": "nse-data"
+			},
+			"columnDelimiter": ",",
+			"escapeChar": "\\",
+			"firstRowAsHeader": true,
+			"quoteChar": "\""
+		},
+		"schema": [
+			{
+				"name": "TradDt",
+				"type": "String"
+			},
+			{
+				"name": "BizDt",
+				"type": "String"
+			},
+			{
+				"name": "Sgmt",
+				"type": "String"
+			},
+			{
+				"name": "Src",
+				"type": "String"
+			},
+			{
+				"name": "FinInstrmTp",
+				"type": "String"
+			},
+			{
+				"name": "FinInstrmId",
+				"type": "String"
+			},
+			{
+				"name": "ISIN",
+				"type": "String"
+			},
+			{
+				"name": "TckrSymb",
+				"type": "String"
+			},
+			{
+				"name": "SctySrs",
+				"type": "String"
+			},
+			{
+				"name": "XpryDt",
+				"type": "String"
+			},
+			{
+				"name": "FininstrmActlXpryDt",
+				"type": "String"
+			},
+			{
+				"name": "StrkPric",
+				"type": "String"
+			},
+			{
+				"name": "OptnTp",
+				"type": "String"
+			},
+			{
+				"name": "FinInstrmNm",
+				"type": "String"
+			},
+			{
+				"name": "OpnPric",
+				"type": "String"
+			},
+			{
+				"name": "HghPric",
+				"type": "String"
+			},
+			{
+				"name": "LwPric",
+				"type": "String"
+			},
+			{
+				"name": "ClsPric",
+				"type": "String"
+			},
+			{
+				"name": "LastPric",
+				"type": "String"
+			},
+			{
+				"name": "PrvsClsgPric",
+				"type": "String"
+			},
+			{
+				"name": "UndrlygPric",
+				"type": "String"
+			},
+			{
+				"name": "SttlmPric",
+				"type": "String"
+			},
+			{
+				"name": "OpnIntrst",
+				"type": "String"
+			},
+			{
+				"name": "ChngInOpnIntrst",
+				"type": "String"
+			},
+			{
+				"name": "TtlTradgVol",
+				"type": "String"
+			},
+			{
+				"name": "TtlTrfVal",
+				"type": "String"
+			},
+			{
+				"name": "TtlNbOfTxsExctd",
+				"type": "String"
+			},
+			{
+				"name": "SsnId",
+				"type": "String"
+			},
+			{
+				"name": "NewBrdLotQty",
+				"type": "String"
+			},
+			{
+				"name": "Rmks",
+				"type": "String"
+			},
+			{
+				"name": "Rsvd1",
+				"type": "String"
+			},
+			{
+				"name": "Rsvd2",
+				"type": "String"
+			},
+			{
+				"name": "Rsvd3",
+				"type": "String"
+			},
+			{
+				"name": "Rsvd4",
+				"type": "String"
+			}
+		]
+	},
+	"type": "Microsoft.DataFactory/factories/datasets"
+}
